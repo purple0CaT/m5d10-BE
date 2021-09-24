@@ -77,7 +77,7 @@ mediaR.post("/", postValid, async (req, res, next) => {
       const newMedia = { ...req.body, imdbID: medId };
       medias.push(newMedia);
       await writeMedia(medias);
-      res.send(medId);
+      res.send({ id: medId });
     } catch (err) {
       next(err);
     }
@@ -177,6 +177,7 @@ mediaR.post("/:mediaId/reviews", reviewValid, async (req, res, next) => {
 mediaR.delete("/:revId/reviews", checkRevId, async (req, res, next) => {
   try {
     const reviews = await getReviews();
+    console.log(1);
     const reviewUpd = reviews.filter((rev) => rev._id == req.params.revId);
     await writeReviews(reviewUpd);
     res.status(200).send("Deleted!");
@@ -184,6 +185,7 @@ mediaR.delete("/:revId/reviews", checkRevId, async (req, res, next) => {
     next(err);
   }
 });
+// PDF
 mediaR.get("/:mediaId/pdf", checkId, async (req, res, next) => {
   try {
     const medias = await getMedia();

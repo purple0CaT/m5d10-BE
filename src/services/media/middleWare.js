@@ -43,4 +43,5 @@ export const reviewValid = [
     .isFloat({ min: 0, max: 5 })
     .notEmpty()
     .withMessage("Rate is a mandatory field! (minimum 0, maximum 5)"),
+  body("elementId").exists().withMessage("elementId is a mandatory field!"),
 ];
